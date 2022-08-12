@@ -66,7 +66,7 @@ class App extends Component {
         <ContactForm onSubmit={this.onSubmit} />
 
         <h2>Contacts</h2>
-        <Filter onFilter={this.onFilter} />
+        <Filter onFilter={this.onFilter} filter={this.state.filter} />
         <ContactList appState={this.state} onDelete={this.onDelete} />
       </div>
     );
