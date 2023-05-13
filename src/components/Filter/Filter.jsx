@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import s from './Filter.module.css';
+import { Label, Input } from './Filter.styled';
 
 class Filter extends Component {
   onHandleSearch = e => {
@@ -10,11 +10,8 @@ class Filter extends Component {
   render() {
     return (
       <>
-        <label className={s.label} htmlFor="search">
-          Find contacts by name
-        </label>
-        <input
-          className={s.input}
+        <Label htmlFor="search">Find contacts by name</Label>
+        <Input
           type="text"
           name="search"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -28,6 +25,9 @@ class Filter extends Component {
   }
 }
 
-Filter.propTypes = { onFilter: PropTypes.func.isRequired };
+Filter.propTypes = {
+  onFilter: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};
 
 export default Filter;
