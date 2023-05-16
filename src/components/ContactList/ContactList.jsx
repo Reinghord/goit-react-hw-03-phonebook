@@ -4,29 +4,25 @@ import { Button, ListItem } from './ContactList.styled';
 
 class ContactList extends Component {
   render() {
-    const { contacts, filter } = this.props.appState;
+    const { filteredContacts } = this.props;
 
     return (
       <>
         <ul>
-          {contacts
-            .filter(contact => {
-              return contact.name.toLowerCase().includes(filter.toLowerCase());
-            })
-            .map(contact => {
-              return (
-                <ListItem key={contact.id}>
-                  {contact.name}: {contact.number}{' '}
-                  <Button
-                    onClick={() => {
-                      this.props.onDelete(contact.id);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </ListItem>
-              );
-            })}
+          {filteredContacts.map(contact => {
+            return (
+              <ListItem key={contact.id}>
+                {contact.name}: {contact.number}{' '}
+                <Button
+                  onClick={() => {
+                    this.props.onDelete(contact.id);
+                  }}
+                >
+                  Delete
+                </Button>
+              </ListItem>
+            );
+          })}
         </ul>
       </>
     );
@@ -34,10 +30,7 @@ class ContactList extends Component {
 }
 
 ContactList.propTypes = {
-  appState: PropTypes.exact({
-    contacts: PropTypes.array.isRequired,
-    filter: PropTypes.string.isRequired,
-  }).isRequired,
+  filteredContacts: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

@@ -51,6 +51,17 @@ class App extends Component {
     this.setState({ filter: filterText });
   };
 
+  onFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+
+    if (filter) {
+      return contacts.filter(contact => {
+        return contact.name.toLowerCase().includes(filter.toLowerCase());
+      });
+    }
+    return contacts;
+  };
+
   onDelete = deleteId => {
     this.setState(prevState => {
       return {
@@ -60,6 +71,8 @@ class App extends Component {
   };
 
   render() {
+    const filteredContacts = this.onFilteredContacts();
+
     return (
       <div>
         <h1>Phonebook</h1>
@@ -67,7 +80,10 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Filter onFilter={this.onFilter} filter={this.state.filter} />
-        <ContactList appState={this.state} onDelete={this.onDelete} />
+        <ContactList
+          filteredContacts={filteredContacts}
+          onDelete={this.onDelete}
+        />
       </div>
     );
   }
